@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Twxt;
 use Illuminate\Http\Request;
 
+//events
+use App\Events\TestEvent;
+use Illuminate\Support\Facades\Event;
+
 class TwxtController extends Controller
 {
     /**
@@ -43,6 +47,12 @@ class TwxtController extends Controller
         //add the twxt to the authenticated user directly using the relationship
         //will add user_id automatically
         auth()->user()->twxts()->create($formfields);
+
+
+        //dispatch the event
+        Event::dispatch(new TestEvent($formfields));
+
+
 
         return to_route('twxts.index')->with('status', 'Twxt was created successfully!!!');
    

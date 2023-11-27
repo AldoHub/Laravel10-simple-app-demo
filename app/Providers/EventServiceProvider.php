@@ -7,6 +7,10 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+//custom event and listener
+use App\Events\TestEvent;
+use App\Listeners\TestListener;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -16,8 +20,11 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         Registered::class => [
-            SendEmailVerificationNotification::class,
+            SendEmailVerificationNotification::class,  
         ],
+        TestEvent::class => [
+            TestListener::class
+        ]
     ];
 
     /**
